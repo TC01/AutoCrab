@@ -7,7 +7,7 @@ crabline = "crab -create -submit -cfg "
 
 def isCrabConfig(filename):
 
-	if ".cfg" in filename.rpartition("."):
+	if ".cfg" in filename:
 		return True
 
 	return False

@@ -27,7 +27,7 @@ def getScaledText(newtext, scaling):
 		if "ui_working_dir" or "user_remote_dir" in line:
 			# ???
 			if not "datasetpath" in line:
-				line = line.replace("_TuneZ2star", "_" + scaling + "_TuneZ2Star")
+				line = line.replace("_TuneZ2star", "_" + scaling + "_TuneZ2star")
 		scaletext += line + "\n"
 	scaletext = scaletext.replace("ntuplizer_cfg.py", scaling + "_cfg.py")
 

@@ -15,6 +15,7 @@ def isCrabDirectory(dir):
 		isDirectory = False
 	if not os.path.exists(os.path.join(dir, "share")):
 		isDirectory = False
+	return isDirectory
 
 def main():
 	# for now, use os.getcwd()

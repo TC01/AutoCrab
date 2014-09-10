@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+
+# Helper script to automatically generate crab config files.
+
+import optparse
+import os
+import sys
+
+template_name = "template.cfg"
+
+def getEOSPath(text):
+	start = text[text.find("SFN=") + len("SFN="):]
+	start = start[:start.find("\n")]
+
+	end = text[text.find("user_remote_dir = ") + len("user_remote_dir = "):]	
+	end = end[:end.find("\n")]
+
+	return start + end
+
+def getScaledText(newtext, scaling):
+	if scaling != 'scaleup' and scaling != 'scaledown':
+		return newtext
+
+	# This is a hack. It works, but it is a hack.
+	scaletext = ""
+	for line in newtext.split("\n"):
+		if "ui_working_dir" or "user_remote_dir" in line:
+			# ???
+			if not "datasetpath" in line:
+				line = line.replace("_TuneZ2star", "_" + scaling + "_TuneZ2Star")
+		scaletext += line + "\n"
+	scaletext = scaletext.replace("ntuplizer_cfg.py", scaling + "_cfg.py")
+
+	return scaletext
+
+def main():
+	parser = optparse.OptionParser()
+	options, args = parser.parse_args()
+
+	short_args = []
+	for arg in args:
+		reduced = arg[1:]
+		short_arg, b, garbage = reduced.partition("/")
+		short_args.append(short_arg)
+
+	text = ""
+	with open(template_name, 'rb') as template:
+		text = template.read()
+	if text == "":
+		print "Error: failed to read template file."
+		sys.exit(1)		
+
+	for i in range(len(args)):
+		short_arg = short_args[i]
+		long_arg = args[i]
+		print "Processing " + short_arg + ", writing config file."
+		newtext = text.replace("$INS_SHORTNAME_HERE", short_arg)
+		newtext = newtext.replace("$INS_LONGNAME_HERE", long_arg)
+		with open(short_arg + ".cfg", "wb") as newfile:
+			newfile.write(newtext)
+		with open(short_arg + "_scaledown.cfg", "wb") as downfile:
+			scaletext = getScaledText(newtext, 'scaledown')
+			downfile.write(scaletext)
+		with open(short_arg + "_scaleup.cfg", "wb") as upfile:
+			scaletext = getScaledText(newtext, 'scaleup')
+			upfile.write(scaletext)
+
+		directory = getEOSPath(newtext)
+		try:
+			os.mkdir(directory)
+			print "Created directory " + directory
+		except:
+			print "Error creating directory."
+
+if __name__ == '__main__':
+	main()

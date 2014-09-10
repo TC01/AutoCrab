@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+import os
+import shutil
+
+crabline = "crab -status -get all -c "
+
+def isCrabDirectory(dir):
+	isDirectory = True
+	if not os.path.exists(os.path.join(dir, "job")):
+		isDirectory = False
+	if not os.path.exists(os.path.join(dir, "res")):
+		isDirectory = False
+	if not os.path.exists(os.path.join(dir, "log")):
+		isDirectory = False
+	if not os.path.exists(os.path.join(dir, "share")):
+		isDirectory = False
+
+def main():
+	# for now, use os.getcwd()
+	for path, dirs, files in os.walk(os.getcwd()):
+		if path != os.getcwd():
+			continue
+
+		for dir in dirs:
+			# Check if the inside is set up like a crab file.
+			if not isCrabDirectory(os.path.join(path, dir)):
+				continue
+			os.system(crabline + dir)
+
+if __name__ == '__main__':
+	main()

@@ -7,7 +7,7 @@ import sys
 
 valid_commands = {	'create':'crab -create -submit -cfg ', 
 					'status':'crab -status -get all -c ', 
-					'resubmit':'crab -resubmit bad -c , 
+					'resubmit':'crab -resubmit bad -c ', 
 					'publish':'crab -publish -c '}
 
 def isCrabDirectory(dir):

@@ -25,18 +25,17 @@ def getScaledText(newtext, scaling):
 	# This is a hack. It works, but it is a hack.
 	scaletext = ""
 	for line in newtext.split("\n"):
-		if "ui_working_dir" or "user_remote_dir" in line:
-			if not "datasetpath" in line:
-				line += scaling
+		if "ui_working_dir" in line or "user_remote_dir" in line:
+			line += scaling
 		scaletext += line + "\n"
 
 	scalestring = "down"
 	if "up" in scaling:
 		scalestring = "up"
 	if "scale" in scaling:
-		scaletext.replace("JES=nominal JER=nominal", "JES=" + scalestring + " JER=nominal")
+		scaletext = scaletext.replace("JES=nominal JER=nominal", "JES=" + scalestring + " JER=nominal")
 	if "smear" in scaling:
-		scaletext.replace("JES=nominal JER=nominal", "JES=nominal JER=" + scalestring)
+		scaletext = scaletext.replace("JES=nominal JER=nominal", "JES=nominal JER=" + scalestring)
 
 	return scaletext
 

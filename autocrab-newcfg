@@ -48,6 +48,7 @@ def main():
 	parser.add_option("-s", "--scale", dest="scale", action="store_true", help="Generate scale files in scalings/.")
 	parser.add_option("-r", "--smearing", dest="smearing", action="store_true", help="Generate smearing files in smearings/.")
 	parser.add_option("-c", "--scheduler", dest="scheduler", default="remoteGlidein", help="The scheduler to use.")
+	parser.add_option("-o", "--output", dest="output", default="/eos/uscms/store/user/bjr/ntuples", help="The output path, should be in eos. Will be created.")
 	options, args = parser.parse_args()
 
 	short_args = []
@@ -82,6 +83,9 @@ def main():
 			newtext = newtext.replace("#lumi_mask", "lumi_mask")
 			newtext = newtext.replace("RunOnData=0", "RunOnData=1")
 		newtext = newtext.replace("scheduler = remoteGlidein", "scheduler = " + options.scheduler)
+		eos_path = options.output[len("/eos/uscms"):]
+		newtext = newtext.replace("$PATH_HERE", eos_path)
+
 		with open(short_arg + ".cfg", "wb") as newfile:
 			newfile.write(newtext)
 
@@ -106,7 +110,7 @@ def main():
 
 		directory = getEOSPath(newtext)
 		try:
-			os.mkdir(directory)
+			os.makedirs(directory)
 			print "Created directory " + directory
 		except:
 			print "Error creating directory."

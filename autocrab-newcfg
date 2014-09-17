@@ -17,7 +17,7 @@ def getEOSPath(text):
 
 	return start + end
 
-def getScaledText(newtext, scaling, isdata):
+def getScaledText(newtext, scaling):
 	scalings = ["scaleup", "scaledown", "smearup", "smeardown"]
 	if not scaling in scalings:
 		return newtext
@@ -59,8 +59,10 @@ def main():
 			short_args.append(short_arg)
 	else:
 		with open(options.input) as input_file:
+			args = []
 			for line in input_file:
-				reduced = arg[1:]
+				args.append(line.rstrip("\n"))
+				reduced = line[1:]
 				short_arg, b, garbage = reduced.partition("/")
 				short_args.append(short_arg)
 

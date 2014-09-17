@@ -48,6 +48,8 @@ def main():
 	(opts, args) = parser.parse_args()
 
 	for arg in args:
+		if arg == "newcfg":
+			print "Please run 'autocrab-newcfg -h'. That command has not been merged yet."
 		if arg not in valid_commands.keys():
 			print "Error: unrecognized autocrab command."
 		else:

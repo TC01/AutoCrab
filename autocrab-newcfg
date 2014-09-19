@@ -82,7 +82,7 @@ def main():
 			newtext = newtext.replace("#dbs_url = phys03", "dbs_url = " + options.dbs)
 		if options.data:
 			newtext = newtext.replace("#lumi_mask", "lumi_mask")
-			newtext = newtext.replace("RunOnData=0", "RunOnData=1")
+			newtext = newtext.replace("runOnData=0", "runOnData=1")
 		newtext = newtext.replace("scheduler = remoteGlidein", "scheduler = " + options.scheduler)
 		eos_path = options.output[len("/eos/uscms"):]
 		newtext = newtext.replace("$PATH_HERE", eos_path)

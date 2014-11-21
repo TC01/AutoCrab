@@ -26,7 +26,7 @@ def getScaledText(newtext, scaling):
 	scaletext = ""
 	for line in newtext.split("\n"):
 		if "ui_working_dir" in line or "user_remote_dir" in line:
-			line += scaling
+			line += "_" + scaling
 		scaletext += line + "\n"
 
 	scalestring = "down"

@@ -27,10 +27,8 @@ def autocrabDelete(dir):
 			shutil.rmtree(remote)
 		except:
 			pass
-		try:
-			shutil.rmtree(dir)
-		except:
-			pass
+
+	shutil.rmtree(dir)
 
 valid_functions = {	'delete': autocrabDelete}
 

@@ -24,10 +24,23 @@ def isCrabDirectory(dir):
 	return isDirectory
 
 def isCrabConfig(filename):
-	# TODO: A better check here. (Look at the inside?)
-	if ".cfg" in filename and not "template.cfg" == name:
-		return True
-	return False
+	"""Check if a file is a legal crab config file."""
+	valid = False
+	if ".cfg" in filename:
+		valid = True
+
+	configFile = open(filename)
+	text = configFile.read()
+
+	# Make sure we have the right blocks inside.
+	if not ("[CRAB]" in text and "[CMSSW]" in text and "[USER]" in text):
+		valid = False
+
+	# Make sure we're not an autocrab template config file
+	if "$INS_SHORTNAME" in text or "$INS_LONGNAME" in text:
+		valid = False	
+
+	return valid
 
 def doAutoCrab(command):
 	crabline = valid_commands[command]

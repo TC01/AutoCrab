@@ -7,6 +7,8 @@ import sys
 
 # Commands that are a simple wrapper around a set of crab commands.
 valid_commands = {	'create':'crab -create -submit -cfg ', 
+					'submit':'crab -submit -c ',
+					'createonly':'crab -create -cfg ',
 					'status':'crab -status -get all -c ', 
 					'resubmit':'crab -resubmit bad -c ', 
 					'publish':'crab -publish -c '}
@@ -82,7 +84,7 @@ def doAutoCrab(command):
 		if path != os.getcwd():
 			continue
 
-		if command == "create":
+		if command == "create" or command == "createonly":
 			for file in files:
 				if not isCrabConfig(file):
 					continue

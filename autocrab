@@ -23,13 +23,13 @@ def autocrabDelete(dir):
 		remoteDir = remoteDir[:remoteDir.find("\n")]
 		# Hardcode /eos/uscms in here.
 		remote = "/eos/uscms/" + remoteDir
-		print "Deleting remote directory with previous run: " + remote
-		print "Deleting local crab directory: " + dir
 		try:
+			print "Deleting remote directory with previous run: " + remote
 			shutil.rmtree(remote)
 		except:
 			pass
 
+	print "Deleting local crab directory: " + dir
 	shutil.rmtree(dir)
 
 valid_functions = {	'delete': autocrabDelete}

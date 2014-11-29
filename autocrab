@@ -136,7 +136,8 @@ def doAutoCrab(command):
 				results = valid_functions[command](dir)
 				if command == "check":
 					if results[0] != results[1]:
-						print dir + ": Only " + results[0] + " out of " + str(results[0]) + " jobs are in exit code 0."
+						print dir + ": Only " + str(results[0]) + " out of " + str(results[0]) + " jobs are in exit code 0."
+						failed = True
 
 	if command == "check" and not failed:
 		print "All jobs ran and have returned with exit code 0."

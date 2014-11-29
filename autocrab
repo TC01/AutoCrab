@@ -47,7 +47,7 @@ def autocrabCheck(dir):
 		logtext = logtext[logtext.rfind("Checking the status of all jobs: please wait"):]
 		totalJobs = logtext[:logtext.find("Total Jobs")].rstrip()
 		totalJobs = totalJobs[totalJobs.rfind(" "):].lstrip()
-		passedJobs = logtet[:logtext.find("Jobs with Wrapper Exit Code : 0")].rstrip()
+		passedJobs = logtext[:logtext.find("Jobs with Wrapper Exit Code : 0")].rstrip()
 		passedJobs = passedJobs[passedJobs.rfind(" "):].lstrip()
 		try:
 			totalJobs = int(totalJobs)
@@ -112,6 +112,8 @@ def doAutoCrab(command):
 
 	# Command specific tracking data.
 	failed = False
+	if command == "check":
+		print "Checking current status of all jobs."
 
 	# for now, use os.getcwd()
 	for path, dirs, files in os.walk(os.getcwd()):
@@ -134,7 +136,7 @@ def doAutoCrab(command):
 				results = valid_functions[command](dir)
 				if command == "check":
 					if results[0] != results[1]:
-						print dir + ": " + Only " + results[0] + " out of " + str(results[0]) + " jobs are in exit code 0."
+						print dir + ": Only " + results[0] + " out of " + str(results[0]) + " jobs are in exit code 0."
 
 	if command == "check" and not failed:
 		print "All jobs ran and have returned with exit code 0."

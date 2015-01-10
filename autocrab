@@ -102,7 +102,7 @@ def isCrabConfig(filename):
 
 	return valid
 
-def doAutoCrab(command):
+def doAutoCrab(command, recursive):
 	function = False
 	crabline = ""
 	if command in valid_commands.keys():
@@ -117,7 +117,10 @@ def doAutoCrab(command):
 
 	# for now, use os.getcwd()
 	for path, dirs, files in os.walk(os.getcwd()):
-		if path != os.getcwd():
+		if path != os.getcwd() and not recursive:
+			continue
+
+		if recursive and isCrabDirectory(path):
 			continue
 
 		if command == "create" or command == "createonly":
@@ -130,10 +133,11 @@ def doAutoCrab(command):
 			# Check if the inside is set up like a crab file.
 			if not isCrabDirectory(os.path.join(path, dir)):
 				continue
+			print "Processing " + dir
 			if not function:
-				os.system(crabline + dir)
+				os.system(crabline + os.path.join(path, dir))
 			else:
-				results = valid_functions[command](dir)
+				results = valid_functions[command](os.path.join(path, dir))
 				if command == "check":
 					if results[0] != results[1]:
 						print dir + ": Only " + str(results[1]) + " out of " + str(results[0]) + " jobs are in exit code 0."
@@ -144,13 +148,14 @@ def doAutoCrab(command):
 
 def main():
 	parser = optparse.OptionParser()
+	parser.add_option("-r", "--recursive", dest="recursive", action="store_true", help="The DBS to look up datasets in.")
 	(opts, args) = parser.parse_args()
 
 	for arg in args:
 		if arg not in valid_commands.keys() and arg not in valid_functions.keys():
 			print "Error: unrecognized autocrab command."
 		else:
-			doAutoCrab(arg)
+			doAutoCrab(arg, opts.recursive)
 
 if __name__ == '__main__':
 	main()

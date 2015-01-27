@@ -5,7 +5,7 @@ import os
 import shutil
 import sys
 
-from autocrab import crabutil
+from AutoCrab.AutoCrab import crabutil
 
 # Commands that are a simple wrapper around a set of crab commands.
 valid_commands = {	'create':'crab -create -submit -cfg ', 
@@ -17,7 +17,7 @@ valid_commands = {	'create':'crab -create -submit -cfg ',
 
 # Functions; should be spun off into another library.
 def autocrabDelete(dir):
-	config = getCrabConfig(dir)
+	config = crabutil.getCrabConfig(dir)
 	with open(config) as configFile:
 		configText = configFile.read()
 		remoteDir = configText[configText.find("user_remote_dir"):]
@@ -44,7 +44,7 @@ def autocrabCheck(dir):
 	os.system(crabline + dir + "> /dev/null")
 
 	# Now access crab.log
-	with open(getCrabLog(dir)) as logfile:
+	with open(crabutil.getCrabLog(dir)) as logfile:
 		logtext = logfile.read()
 		logtext = logtext[logtext.rfind("Checking the status of all jobs: please wait"):]
 		totalJobs = logtext[:logtext.find("Total Jobs")].rstrip()
@@ -81,18 +81,18 @@ def doAutoCrab(command, recursive):
 		if path != os.getcwd() and not recursive:
 			continue
 
-		if recursive and isCrabDirectory(path):
+		if recursive and crabutil.isCrabDirectory(path):
 			continue
 
 		if command == "create" or command == "createonly":
 			for file in files:
-				if not isCrabConfig(file):
+				if not crabutil.isCrabConfig(file):
 					continue
 				os.system(crabline + file)
 
 		for dir in dirs:
 			# Check if the inside is set up like a crab file.
-			if not isCrabDirectory(os.path.join(path, dir)):
+			if not crabutil.isCrabDirectory(os.path.join(path, dir)):
 				continue
 			print "Processing " + dir
 			if not function:

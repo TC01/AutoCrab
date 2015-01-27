@@ -3,6 +3,8 @@ Utility functions for working with CRAB. Used by most
 of the autocrab commands.
 """
 
+import os
+
 def getCrabConfig(dir):
 	"""Retrieves backup copy of crab config file in directory."""
 	path = os.path.join(dir, "share", "crab.cfg")

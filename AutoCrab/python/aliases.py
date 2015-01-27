@@ -20,5 +20,4 @@ dir_commands = {	'submit':'-submit',
 # Some definitions. It seems I've picked up the "enum" "design" "pattern"...
 CFG_COMMAND = 1
 DIR_COMMAND = 2
-FUNCTION_COMMAND = 3
-PLUGIN_COMMAND = 4
+PLUGIN_COMMAND = 3

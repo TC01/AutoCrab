@@ -2,8 +2,12 @@
 Autocrab Core; the code that gets ran by the script.
 """
 
-import aliases
-import crabutil
+import os
+import shutil
+import sys
+
+from AutoCrab.AutoCrab import aliases
+from AutoCrab.AutoCrab import crabutil
 
 # These probably shouldn't be here.
 
@@ -109,7 +113,7 @@ def doAutoCrab(command, recursive):
 				# Construct a crab command line.
 				crabline = aliases.crab_command + " "
 				if getCommandType(command) == aliases.CFG_COMMAND:
-					crabline += aliases.cfg_commands[command] " -cfg "
+					crabline += aliases.cfg_commands[command] + " -cfg "
 				elif getCommandType(command) == aliases.DIR_COMMAND:
 					crabline += aliases.dir_commands[command] + " -c "
 				os.system(crabline + os.path.join(path, dir))

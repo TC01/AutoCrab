@@ -11,7 +11,7 @@ cfg_commands = {	'create':'-create -submit',
 					}
 
 # Commands that should be run with the -c option.
-dir_commands = {	'submit':'-submit'
+dir_commands = {	'submit':'-submit',
 					'status':'-status -get all', 
 					'resubmit':'-resubmit bad', 
 					'publish':'-publish'

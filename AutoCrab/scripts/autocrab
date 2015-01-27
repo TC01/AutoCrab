@@ -13,10 +13,10 @@ def main():
 	(opts, args) = parser.parse_args()
 
 	for arg in args:
-		if arg not in valid_commands.keys() and arg not in valid_functions.keys():
+		if not core.isValidCommand(arg):
 			print "Error: unrecognized autocrab command."
 		else:
-			doAutoCrab(arg, opts.recursive)
+			core.doAutoCrab(arg, opts.recursive)
 
 if __name__ == '__main__':
 	main()

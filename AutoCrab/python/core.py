@@ -18,6 +18,8 @@ def isValidCommand(command):
 		valid = True
 	if command in aliases.dir_commands.keys():
 		valid = True
+	if command in commands.plugin_commands.keys():
+		valid = True
 	return valid
 
 def getCommandType(command):

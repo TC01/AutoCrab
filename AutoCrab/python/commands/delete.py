@@ -1,6 +1,8 @@
 # The autocrab delete plugin command.
 
-from Autocrab.Autocrab import crabutil
+import shutil
+
+from AutoCrab.AutoCrab import crabutil
 
 # Hardcode /eos/uscms in here.
 eos_root = "/eos/uscms"

@@ -1,12 +1,16 @@
 # The 'autocrab check' plugin command.
 
-from Autocrab.Autocrab import crabutil
+import os
+import shutil
+
+from AutoCrab.AutoCrab import aliases
+from AutoCrab.AutoCrab import crabutil
 
 def autocrab(dir):
 	"""Creates a CrabStats object by running crab -status -get all
 		and summarizing the results."""
 
-	crabline = valid_commands['status']
+	crabline = aliases.crab_command + " " + aliases.dir_commands['status'] + " "
 	# We need to run twice, otherwise we can't guarantee that "get" ran.
 	os.system(crabline + dir + "> /dev/null")
 	os.system(crabline + dir + "> /dev/null")

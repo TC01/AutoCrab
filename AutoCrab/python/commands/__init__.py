@@ -39,3 +39,7 @@ def getScriptLocation():
 	if __file__.rfind("/") != -1:
 		location = __file__[:__file__.rfind("/")]
 	return location
+
+
+# Actually *load* commands.
+loadCommands([], True)

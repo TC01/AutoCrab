@@ -5,7 +5,7 @@ import os
 import shutil
 import sys
 
-from AutoCrab.AutoCrab import core
+from AutoCrab.AutoCrab2 import core
 
 def main():
 	parser = optparse.OptionParser()

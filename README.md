@@ -1,6 +1,10 @@
 autocrab
 ========
 
+NOTE: this documentation is all for the **CRAB 2** versions of AutoCrab, which
+have now been rename to **autocrab2** and **autocrab2-newcfg**. CRAB 3 versions
+are under active development.
+
 A collection of tools to automate running crab jobs for CMS analyses.
 
 ## Using autocrab-newcfg:

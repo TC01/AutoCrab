@@ -2,7 +2,7 @@
 
 import shutil
 
-from AutoCrab.AutoCrab import crabutil
+from AutoCrab.AutoCrab2 import crabutil
 
 # Hardcode /eos/uscms in here.
 eos_root = "/eos/uscms"

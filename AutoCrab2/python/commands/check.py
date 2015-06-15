@@ -3,8 +3,8 @@
 import os
 import shutil
 
-from AutoCrab.AutoCrab import aliases
-from AutoCrab.AutoCrab import crabutil
+from AutoCrab.AutoCrab2 import aliases
+from AutoCrab.AutoCrab2 import crabutil
 
 def autocrab(dir):
 	"""Creates a CrabStats object by running crab -status -get all

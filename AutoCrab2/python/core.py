@@ -6,9 +6,9 @@ import os
 import shutil
 import sys
 
-from AutoCrab.AutoCrab import aliases
-from AutoCrab.AutoCrab import crabutil
-from AutoCrab.AutoCrab import commands
+from AutoCrab.AutoCrab2 import aliases
+from AutoCrab.AutoCrab2 import crabutil
+from AutoCrab.AutoCrab2 import commands
 
 def isValidCommand(command):
 	"""isValidCommand returns 0 if the command is not a valid autocrab command,

@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+
+# Because I didn't feel like rewriting autocrab3-newcfg just yet... 
+# This is a wrapper around the crab2-crab3 config converter script
+# that runs multiple config files at once, and also gives them a
+# sane default output name (the name of the crab2 config file, 
+# just with s/cfg/py/ on the end).
+
+# crab2cfgTOcrab3py is a great tool, but it can only handle one
+# file at a time, which is why I wrote this. :)
+
+# Ben Rosser
+
+import optparse
+import os
+import shutil
+import sys
+
+# imp routine to import a module.
+
+def main():
+	parser = optparse.OptionParser()
+	parser.add_option("-f", "--force", dest="force", action="store_true", help="Overwrite created config files.")
+	parser.add_option("-o", "--output-dir", dest="outputDir", default=os.path.join(os.getcwd(), "converted"), help="The directory to write CRAB3 config files.")
+
+	opts, args = parser.parse_args()
+
+	# Delete the output directory if told  to do so, then try to create it regardless
+	if opts.force:
+		try:
+			shutil.rmtree(opts.outputDir)
+		except OSError:
+			print "No old directory to remove, continuing..."
+	try:
+		os.mkdir(opts.outputDir)
+	except:
+		print "Error: could not create output directory! It may already exist?"
+
+	# Actually run the converter.
+	newFiles = []
+	for argument in args:
+		convertCommand = "crab2cfgTOcrab3py " + argument
+		filename = argument.split("/")[-1]
+		newFile = os.path.join(opts.outputDir, filename.partition(".")[0] + ".py")
+		newFiles.append(newFile)
+		convertCommand += " " + newFile
+		print "Running the command '" + convertCommand + "'"
+		os.system(convertCommand)
+
+if __name__ == '__main__':
+	main()

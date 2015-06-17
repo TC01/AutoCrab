@@ -39,6 +39,7 @@ def main():
 	elif crabVersion == 3:
 		print "We detected CRAB3 on your path. Creating AutoCrab3 symlinks."
 		createAutocrabLink('autocrab3', 'autocrab')
+		createAutocrabLink('autocrab3-convert', 'autocrab-convert')
 	elif crabVersion == 2:
 		print "We detected CRAB2 on your path. Creating AutoCrab2 symlinks."	
 		createAutocrabLink('autocrab2', 'autocrab')

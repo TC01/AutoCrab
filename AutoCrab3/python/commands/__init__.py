@@ -15,8 +15,9 @@ def loadCommands(toLoad, useAll=False):
 		if path == location:
 			for filename in files:
 				if not (".pyc" in filename or "__init__" in filename):
-					filename = filename[:-len(".py")]
-					names.append(filename)
+					if filename[-3:] == '.py':
+						filename = filename[:-len(".py")]
+						names.append(filename)
 					
 	# Now, use imp to load all the commands we specified
 	global plugin_commands

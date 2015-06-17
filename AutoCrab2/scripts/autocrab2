@@ -9,7 +9,7 @@ from AutoCrab.AutoCrab2 import core
 
 def main():
 	parser = optparse.OptionParser()
-	parser.add_option("-r", "--recursive", dest="recursive", action="store_true", help="The DBS to look up datasets in.")
+	parser.add_option("-r", "--recursive", dest="recursive", action="store_true", help=""Recursively look for CRAB job files and directories.")
 	(opts, args) = parser.parse_args()
 
 	for arg in args:

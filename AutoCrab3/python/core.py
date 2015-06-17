@@ -47,6 +47,8 @@ def doAutoCrab(command, recursive=False):
 			for file in files:
 				if not crabutil.isCrabConfig(file):
 					continue
+				crabline = aliases.crab_command + " "
+				crabline += aliases.cfg_commands[command] + " "
 				os.system(crabline + file)
 
 		for dir in dirs:

@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+
+# Little python script that tries to detect which version of CRAB is running.
+
+import os
+
+def getScriptLocation():
+	"""	Helper function, determines where *this* script is located."""	
+	location = os.path.abspath("./")
+	if __file__.rfind("/") != -1:
+		location = __file__[:__file__.rfind("/")]
+	return location
+
+def createAutocrabLink(source, linkName):
+	"""	Create an autocrab* symlink to an autocrab{2,3}* script in $CMSSW_SRC/bin/.../"""
+	location = getScriptLocation()
+	fullSource = os.path.join(location, source)
+	fullLink = os.path.join(location, linkName)
+	try:
+		os.unlink(fullSource)
+	except OSError:
+		pass
+	os.symlink(fullSource, fullLink)
+	print "** Linked " + fullSource + " to " + fullLink
+
+def main():
+	# First, determine the version of CRAB that is on the path, if there is one.
+	systemPath = os.getenv('PATH')
+	crabVersion = 0
+	for path in systemPath:
+		if 'crab3' in path:
+			crabVersion = 3
+	if crabVersion != 3:
+		for path in systemPath
+			if 'crab' in path:
+				crabVersion = 2
+	if crabVersion == 0:
+		print "Error: you do not appear to have CRAB on your path. Please fix and rerun."
+	elif crabVersion == 3:
+		print "We detected CRAB3 on your path. Creating AutoCrab symlinks."
+		createAutocrabLink('autocrab2', 'autocrab')
+		createAutocrabLink('autocrab2-newcfg', 'autocrab-newcfg')
+	elif crabVersion == 2:
+		print "We detected CRAB2 on your path. Creating AutoCrab2 symlinks."	
+		createAutocrabLink('autocrab3', 'autocrab')
+
+if __name__ == '__main__':
+	main()
+
+

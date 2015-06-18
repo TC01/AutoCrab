@@ -49,7 +49,7 @@ def doAutoCrab(command, recursive=False):
 					continue
 				crabline = aliases.crab_command + " "
 				crabline += aliases.cfg_commands[command] + " "
-				os.system(crabline + os.path.join(path, file))
+				os.system("cd " + path + " && " + crabline + os.path.join(path, file))
 
 		for dir in dirs:
 			# Check if the inside is set up like a crab file.
@@ -66,7 +66,7 @@ def doAutoCrab(command, recursive=False):
 					crabline += aliases.cfg_commands[command] + " "
 				elif getCommandType(command) == aliases.DIR_COMMAND:
 					crabline += aliases.dir_commands[command] + " "
-				os.system(crabline + os.path.join(path, dir))
+				os.system("cd " + path + " && " + crabline + os.path.join(path, dir))
 
 			#	results = valid_functions[command](os.path.join(path, dir))
 

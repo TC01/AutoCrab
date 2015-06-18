@@ -45,11 +45,11 @@ def doAutoCrab(command, recursive=False):
 
 		if getCommandType(command) == aliases.CFG_COMMAND:
 			for file in files:
-				if not crabutil.isCrabConfig(file):
+				if not crabutil.isCrabConfig(os.path.join(path, file)):
 					continue
 				crabline = aliases.crab_command + " "
 				crabline += aliases.cfg_commands[command] + " "
-				os.system(crabline + file)
+				os.system(crabline + os.path.join(path, file))
 
 		for dir in dirs:
 			# Check if the inside is set up like a crab file.
